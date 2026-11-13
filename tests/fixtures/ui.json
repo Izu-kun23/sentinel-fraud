@@ -1,0 +1,486 @@
+{
+  "/transactions/import": {
+    "rows": [
+      {
+        "id": "CSV-00002",
+        "amount": 560.0,
+        "hour": 2,
+        "distance_km": 450.0,
+        "transactions_24h": 9,
+        "account_age_days": 25,
+        "international": 1,
+        "probability": 0.8317279815673828,
+        "flagged": true
+      },
+      {
+        "id": "CSV-00001",
+        "amount": 35.5,
+        "hour": 14,
+        "distance_km": 3.0,
+        "transactions_24h": 2,
+        "account_age_days": 650,
+        "international": 0,
+        "probability": 0.003858828218653798,
+        "flagged": false
+      }
+    ],
+    "count": 2,
+    "flagged": 1,
+    "model": "XGBoost",
+    "note": "Scored using the synthetic demonstration model; imported data is not persisted"
+  },
+  "/overview": {
+    "winner": "XGBoost",
+    "metrics": {
+      "Logistic Regression": {
+        "precision": 0.16216216216216217,
+        "recall": 0.17647058823529413,
+        "f1": 0.16901408450704225,
+        "roc_auc": 0.7589294723035012,
+        "average_precision": 0.10377126579769931,
+        "false_positive_rate": 0.026586620926243566,
+        "threshold": 0.8403604895462082,
+        "confusion_matrix": [
+          [
+            1135,
+            31
+          ],
+          [
+            28,
+            6
+          ]
+        ]
+      },
+      "Random Forest": {
+        "precision": 0.17391304347826086,
+        "recall": 0.23529411764705882,
+        "f1": 0.2,
+        "roc_auc": 0.7841287458379578,
+        "average_precision": 0.15005581513511823,
+        "false_positive_rate": 0.032590051457975985,
+        "threshold": 0.3995526303271827,
+        "confusion_matrix": [
+          [
+            1128,
+            38
+          ],
+          [
+            26,
+            8
+          ]
+        ]
+      },
+      "XGBoost": {
+        "precision": 0.13953488372093023,
+        "recall": 0.17647058823529413,
+        "f1": 0.15584415584415584,
+        "roc_auc": 0.8040813237816568,
+        "average_precision": 0.1518238266728903,
+        "false_positive_rate": 0.03173241852487135,
+        "threshold": 0.15069694817066193,
+        "confusion_matrix": [
+          [
+            1129,
+            37
+          ],
+          [
+            28,
+            6
+          ]
+        ]
+      }
+    },
+    "validation_ap": {
+      "Logistic Regression": 0.1293431825076902,
+      "Random Forest": 0.18335668530973426,
+      "XGBoost": 0.2127309859321823
+    },
+    "prevalence": 0.028166666666666666,
+    "transactions": 1200,
+    "flagged": 43,
+    "rows": [
+      {
+        "id": "TXN-02411",
+        "amount": 296.13,
+        "hour": 0.0,
+        "distance_km": 351.30486561313404,
+        "transactions_24h": 4.0,
+        "account_age_days": 603.0,
+        "international": 0.0,
+        "probability": 0.5161241292953491,
+        "flagged": true
+      },
+      {
+        "id": "TXN-01544",
+        "amount": 229.66,
+        "hour": 1.0,
+        "distance_km": 258.886826855863,
+        "transactions_24h": 5.0,
+        "account_age_days": 1661.0,
+        "international": 0.0,
+        "probability": 0.45113417506217957,
+        "flagged": true
+      },
+      {
+        "id": "TXN-03492",
+        "amount": 31.87,
+        "hour": 11.0,
+        "distance_km": 22.75244751548259,
+        "transactions_24h": 9.0,
+        "account_age_days": 1270.0,
+        "international": 0.0,
+        "probability": 0.38974079489707947,
+        "flagged": true
+      },
+      {
+        "id": "TXN-05352",
+        "amount": 146.9,
+        "hour": 2.0,
+        "distance_km": 207.94751895142952,
+        "transactions_24h": 5.0,
+        "account_age_days": 574.0,
+        "international": 0.0,
+        "probability": 0.35774120688438416,
+        "flagged": true
+      },
+      {
+        "id": "TXN-01471",
+        "amount": 172.44,
+        "hour": 1.0,
+        "distance_km": 194.00909409615363,
+        "transactions_24h": 4.0,
+        "account_age_days": 886.0,
+        "international": 0.0,
+        "probability": 0.34050846099853516,
+        "flagged": true
+      },
+      {
+        "id": "TXN-05789",
+        "amount": 232.69,
+        "hour": 1.0,
+        "distance_km": 189.01690405651647,
+        "transactions_24h": 5.0,
+        "account_age_days": 1333.0,
+        "international": 0.0,
+        "probability": 0.3362995684146881,
+        "flagged": true
+      },
+      {
+        "id": "TXN-01850",
+        "amount": 20.7,
+        "hour": 2.0,
+        "distance_km": 235.02076027259028,
+        "transactions_24h": 5.0,
+        "account_age_days": 402.0,
+        "international": 1.0,
+        "probability": 0.33562687039375305,
+        "flagged": true
+      },
+      {
+        "id": "TXN-00214",
+        "amount": 30.17,
+        "hour": 11.0,
+        "distance_km": 111.59254018681118,
+        "transactions_24h": 6.0,
+        "account_age_days": 21.0,
+        "international": 1.0,
+        "probability": 0.31107789278030396,
+        "flagged": true
+      },
+      {
+        "id": "TXN-00624",
+        "amount": 78.68,
+        "hour": 2.0,
+        "distance_km": 290.9793858358805,
+        "transactions_24h": 4.0,
+        "account_age_days": 2190.0,
+        "international": 0.0,
+        "probability": 0.3096525967121124,
+        "flagged": true
+      },
+      {
+        "id": "TXN-05717",
+        "amount": 25.66,
+        "hour": 0.0,
+        "distance_km": 27.2064573938843,
+        "transactions_24h": 7.0,
+        "account_age_days": 1376.0,
+        "international": 1.0,
+        "probability": 0.3083498477935791,
+        "flagged": true
+      },
+      {
+        "id": "TXN-00983",
+        "amount": 108.06,
+        "hour": 2.0,
+        "distance_km": 200.1142363701007,
+        "transactions_24h": 4.0,
+        "account_age_days": 396.0,
+        "international": 0.0,
+        "probability": 0.27988722920417786,
+        "flagged": true
+      },
+      {
+        "id": "TXN-02867",
+        "amount": 280.11,
+        "hour": 0.0,
+        "distance_km": 4.796786942526693,
+        "transactions_24h": 2.0,
+        "account_age_days": 794.0,
+        "international": 1.0,
+        "probability": 0.27911147475242615,
+        "flagged": true
+      },
+      {
+        "id": "TXN-00494",
+        "amount": 30.86,
+        "hour": 23.0,
+        "distance_km": 292.5065900596109,
+        "transactions_24h": 7.0,
+        "account_age_days": 979.0,
+        "international": 0.0,
+        "probability": 0.26286131143569946,
+        "flagged": true
+      },
+      {
+        "id": "TXN-00162",
+        "amount": 574.88,
+        "hour": 20.0,
+        "distance_km": 326.3775605888378,
+        "transactions_24h": 5.0,
+        "account_age_days": 1888.0,
+        "international": 0.0,
+        "probability": 0.2604188323020935,
+        "flagged": true
+      },
+      {
+        "id": "TXN-00923",
+        "amount": 22.52,
+        "hour": 20.0,
+        "distance_km": 215.6306713540668,
+        "transactions_24h": 9.0,
+        "account_age_days": 377.0,
+        "international": 0.0,
+        "probability": 0.258279025554657,
+        "flagged": true
+      },
+      {
+        "id": "TXN-05050",
+        "amount": 73.92,
+        "hour": 2.0,
+        "distance_km": 194.47973589597498,
+        "transactions_24h": 4.0,
+        "account_age_days": 583.0,
+        "international": 0.0,
+        "probability": 0.25308024883270264,
+        "flagged": true
+      },
+      {
+        "id": "TXN-04762",
+        "amount": 64.16,
+        "hour": 0.0,
+        "distance_km": 246.4964995390198,
+        "transactions_24h": 4.0,
+        "account_age_days": 204.0,
+        "international": 0.0,
+        "probability": 0.2504390776157379,
+        "flagged": true
+      },
+      {
+        "id": "TXN-05601",
+        "amount": 223.77,
+        "hour": 16.0,
+        "distance_km": 29.33470045277617,
+        "transactions_24h": 7.0,
+        "account_age_days": 1981.0,
+        "international": 1.0,
+        "probability": 0.24512949585914612,
+        "flagged": true
+      },
+      {
+        "id": "TXN-04853",
+        "amount": 5.4,
+        "hour": 22.0,
+        "distance_km": 306.8591645435882,
+        "transactions_24h": 5.0,
+        "account_age_days": 679.0,
+        "international": 1.0,
+        "probability": 0.22373110055923462,
+        "flagged": true
+      },
+      {
+        "id": "TXN-03068",
+        "amount": 540.26,
+        "hour": 12.0,
+        "distance_km": 422.08515079297047,
+        "transactions_24h": 5.0,
+        "account_age_days": 2106.0,
+        "international": 0.0,
+        "probability": 0.2228960245847702,
+        "flagged": true
+      },
+      {
+        "id": "TXN-00349",
+        "amount": 262.73,
+        "hour": 14.0,
+        "distance_km": 317.1569736667456,
+        "transactions_24h": 4.0,
+        "account_age_days": 522.0,
+        "international": 0.0,
+        "probability": 0.22102822363376617,
+        "flagged": true
+      },
+      {
+        "id": "TXN-02651",
+        "amount": 4.58,
+        "hour": 4.0,
+        "distance_km": 19.26526805014786,
+        "transactions_24h": 9.0,
+        "account_age_days": 589.0,
+        "international": 0.0,
+        "probability": 0.2154691070318222,
+        "flagged": true
+      },
+      {
+        "id": "TXN-00209",
+        "amount": 29.94,
+        "hour": 9.0,
+        "distance_km": 161.12526616862516,
+        "transactions_24h": 5.0,
+        "account_age_days": 18.0,
+        "international": 1.0,
+        "probability": 0.21150213479995728,
+        "flagged": true
+      },
+      {
+        "id": "TXN-04144",
+        "amount": 245.68,
+        "hour": 3.0,
+        "distance_km": 50.013890946129806,
+        "transactions_24h": 2.0,
+        "account_age_days": 1003.0,
+        "international": 1.0,
+        "probability": 0.20693731307983398,
+        "flagged": true
+      },
+      {
+        "id": "TXN-05367",
+        "amount": 394.5,
+        "hour": 4.0,
+        "distance_km": 132.592894588692,
+        "transactions_24h": 1.0,
+        "account_age_days": 897.0,
+        "international": 1.0,
+        "probability": 0.20628923177719116,
+        "flagged": true
+      },
+      {
+        "id": "TXN-04868",
+        "amount": 592.39,
+        "hour": 0.0,
+        "distance_km": 163.8915287260577,
+        "transactions_24h": 2.0,
+        "account_age_days": 706.0,
+        "international": 0.0,
+        "probability": 0.205527663230896,
+        "flagged": true
+      },
+      {
+        "id": "TXN-05984",
+        "amount": 2.28,
+        "hour": 19.0,
+        "distance_km": 202.10827660549603,
+        "transactions_24h": 4.0,
+        "account_age_days": 1990.0,
+        "international": 1.0,
+        "probability": 0.19960948824882507,
+        "flagged": true
+      },
+      {
+        "id": "TXN-04885",
+        "amount": 29.41,
+        "hour": 10.0,
+        "distance_km": 338.91168486030074,
+        "transactions_24h": 2.0,
+        "account_age_days": 1812.0,
+        "international": 1.0,
+        "probability": 0.19957098364830017,
+        "flagged": true
+      },
+      {
+        "id": "TXN-02272",
+        "amount": 95.35,
+        "hour": 1.0,
+        "distance_km": 250.52102302440107,
+        "transactions_24h": 2.0,
+        "account_age_days": 1189.0,
+        "international": 0.0,
+        "probability": 0.19445379078388214,
+        "flagged": true
+      },
+      {
+        "id": "TXN-01345",
+        "amount": 714.66,
+        "hour": 4.0,
+        "distance_km": 81.76635150574015,
+        "transactions_24h": 8.0,
+        "account_age_days": 1322.0,
+        "international": 1.0,
+        "probability": 0.19169558584690094,
+        "flagged": true
+      }
+    ],
+    "histogram": [
+      1103,
+      59,
+      21,
+      10,
+      5,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "source": "Synthetic data; not a production fraud model"
+  },
+  "/predict": {
+    "probability": 0.8933615684509277,
+    "threshold": 0.15069694817066193,
+    "flagged": true,
+    "model": "XGBoost",
+    "data_source": "synthetic demonstration",
+    "explanation": {
+      "method": "SHAP",
+      "output_space": "log-odds",
+      "contributions": [
+        {
+          "feature": "distance_km",
+          "value": 1.5883070230484009
+        },
+        {
+          "feature": "transactions_24h",
+          "value": 1.0686496496200562
+        },
+        {
+          "feature": "amount",
+          "value": 0.8945559859275818
+        },
+        {
+          "feature": "international",
+          "value": 0.8278924226760864
+        },
+        {
+          "feature": "account_age_days",
+          "value": 0.7468796968460083
+        },
+        {
+          "feature": "hour",
+          "value": 0.5763009190559387
+        }
+      ]
+    }
+  }
+}

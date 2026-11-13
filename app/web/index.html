@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Transaction risk intelligence" />
+    <title>Sentinel — Transaction risk intelligence</title>
+    <link rel="stylesheet" href="/assets/style.css" />
+    <style>
+      :root {
+        --accent: #12836f;
+        --soft: #e9f7f2;
+      }
+    </style>
+  </head>
+  <body>
+    <aside>
+      <div class="brand">
+        <span class="mark">S</span>Sentinel<span
+          style="font-size: 10px; color: #9aa4b6; letter-spacing: 0"
+        >
+          / LAB</span
+        >
+      </div>
+      <p class="muted">Transaction risk intelligence</p>
+      <div class="navlabel">WORKSPACE</div>
+      <a class="navitem active" href="/">◈ &nbsp; Risk overview</a
+      ><a class="navitem" href="/docs">⌘ &nbsp; API explorer</a
+      ><a class="navitem" href="https://github.com/Izu-kun23/sentinel-fraud"
+        >↗ &nbsp; Documentation</a
+      >
+      <div class="asidefoot">
+        <span class="avatar">IT</span
+        ><strong style="font-size: 12px">Izuchukwu Tony</strong>
+        <p class="muted">Portfolio engineering lab</p>
+      </div>
+    </aside>
+    <main>
+      <header>
+        <span>Workspace &nbsp; / &nbsp; <strong>Risk overview</strong></span
+        ><span class="badge">● &nbsp; Local workspace</span>
+      </header>
+      <div class="intro">
+        <div>
+          <div class="eyebrow">Transaction risk intelligence</div>
+          <h1>Risk overview</h1>
+          <div class="muted">Make every risk decision explainable.</div>
+        </div>
+        <span class="badge">Built for clarity. Engineered for depth.</span>
+      </div>
+      <section class="stats" id="stats"></section>
+      <div class="warning">
+        DEMONSTRATION DATA · Models learn from reproducible synthetic
+        transactions. Scores are model estimates, not validated fraud
+        probabilities.
+      </div>
+      <div class="grid" style="margin-top: 22px">
+        <section>
+          <div class="card">
+            <div class="cardhead">
+              <h2>Model performance</h2>
+              <span class="pill">HELD-OUT TEST SET</span>
+            </div>
+            <p class="muted">
+              Three classifiers. One fixed split. Thresholds selected on
+              validation data only.
+            </p>
+            <div class="tablewrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Model</th>
+                    <th>Precision</th>
+                    <th>Recall</th>
+                    <th>F1</th>
+                    <th>AP</th>
+                  </tr>
+                </thead>
+                <tbody id="models"></tbody>
+              </table>
+            </div>
+            <p class="muted" id="winner"></p>
+          </div>
+          <div class="card">
+            <div class="cardhead">
+              <h2>Transaction review queue</h2>
+              <span class="pill">Highest scores first</span>
+            </div>
+            <form id="import">
+              <label for="csv"
+                >Import your transaction CSV (up to 1,000 rows)</label
+              >
+              <div class="row" style="margin-bottom: 15px">
+                <input
+                  id="csv"
+                  type="file"
+                  accept=".csv,text/csv"
+                  required
+                /><button class="secondary">Score CSV ↗</button>
+              </div>
+            </form>
+            <div class="tablewrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Transaction</th>
+                    <th>Amount</th>
+                    <th>Distance</th>
+                    <th>Score</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="transactions"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="card">
+            <h2>Inspect a transaction</h2>
+            <p class="muted">Adjust inputs to explore the selected model.</p>
+            <form id="predict">
+              <div class="row">
+                <div>
+                  <label for="amount">Amount (£)</label
+                  ><input
+                    id="amount"
+                    type="number"
+                    min="0"
+                    max="1000000"
+                    value="450"
+                    step=".01"
+                    required
+                  />
+                </div>
+                <div>
+                  <label for="hour">Hour (0–23)</label
+                  ><input
+                    id="hour"
+                    type="number"
+                    min="0"
+                    max="23"
+                    value="2"
+                    required
+                  />
+                </div>
+              </div>
+              <label for="distance_km">Distance from usual location (km)</label
+              ><input
+                id="distance_km"
+                type="number"
+                min="0"
+                max="20000"
+                value="240"
+                required
+              />
+              <div class="row">
+                <div>
+                  <label for="transactions_24h">Transactions / 24h</label
+                  ><input
+                    id="transactions_24h"
+                    type="number"
+                    min="0"
+                    max="1000"
+                    value="8"
+                    required
+                  />
+                </div>
+                <div>
+                  <label for="account_age_days">Account age (days)</label
+                  ><input
+                    id="account_age_days"
+                    type="number"
+                    min="0"
+                    max="20000"
+                    value="40"
+                    required
+                  />
+                </div>
+              </div>
+              <label for="international">International payment</label
+              ><select id="international">
+                <option value="1">Yes</option>
+                <option value="0">No</option></select
+              ><button class="primary" style="width: 100%; margin-top: 19px">
+                Analyse transaction ↗
+              </button>
+            </form>
+            <div id="status" class="status" role="status"></div>
+            <div id="prediction"></div>
+          </div>
+          <div class="card">
+            <h2>Score distribution</h2>
+            <p class="muted">Held-out transactions, grouped into 12 bins.</p>
+            <div id="histogram" class="chart"></div>
+            <div class="row muted" style="justify-content: space-between">
+              <span>0 · Lower score</span><span>1 · Higher score</span>
+            </div>
+          </div>
+        </section>
+      </div>
+      <footer>
+        Sentinel / Engineering portfolio · Python + FastAPI ·
+        <a href="/docs">Explore the API ↗</a>
+      </footer>
+    </main>
+    <script src="/assets/common.js"></script>
+    <script src="/assets/app.js"></script>
+  </body>
+</html>

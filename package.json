@@ -1,0 +1,10 @@
+{
+  "name": "sentinel-fraud-ui-checks",
+  "private": true,
+  "scripts": {
+    "test:ui": "node tests/ui.cjs"
+  },
+  "devDependencies": {
+    "jsdom": "31.0.1"
+  }
+}
