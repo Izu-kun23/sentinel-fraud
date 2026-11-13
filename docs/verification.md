@@ -24,3 +24,7 @@ Test AP bootstrap 95% interval for the selected model: [0.073, 0.268]. This inte
 ## Reproduce
 
 Install `requirements.lock`, then run `python -m pytest -q`. Install Node 24+, run `npm ci && npm run test:ui`. Open the notebook in Jupyter and run all cells. See README for ports and configuration.
+
+## Notebook and Tailwind update
+
+Three substantive notebooks (20 executed code cells) now cover baseline analysis, deeper experiments and operational audits. All code cells executed with saved outputs; no error outputs remain. Tailwind CSS 4.3.5 builds successfully. DOM workflow checks pass after the UI changes. GitHub uses normal notebook language detection; only compiler-generated CSS is marked generated.
