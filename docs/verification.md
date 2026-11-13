@@ -28,3 +28,9 @@ Install `requirements.lock`, then run `python -m pytest -q`. Install Node 24+, r
 ## Notebook and Tailwind update
 
 Three substantive notebooks (20 executed code cells) now cover baseline analysis, deeper experiments and operational audits. All code cells executed with saved outputs; no error outputs remain. Tailwind CSS 4.3.5 builds successfully. DOM workflow checks pass after the UI changes. GitHub notebook inclusion is explicitly enabled without overriding its detected language; only compiler-generated CSS is marked generated.
+
+## MLOps update
+
+Release fingerprints, experiment gates, bounded operational telemetry and fresh-kernel notebook CI are implemented. Validation records are generated under ignored `artifacts/`; they are not claims that GitHub CI has executed. See `docs/mlops.md` for exact scope and deployment limits.
+
+Final MLOps validation: 3 notebooks, 21 executed code cells; regression tests and project evaluation gates pass locally. Hosted Atlas uses real NVIDIA inference; provider completion IDs are recorded separately from mocked tests.

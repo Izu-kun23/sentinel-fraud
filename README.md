@@ -26,7 +26,7 @@ cd sentinel-fraud
 python -m venv .venv
 source .venv/bin/activate
 # Windows PowerShell: .venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
+python -m pip install -r requirements-runtime.lock
 python -m uvicorn app.main:app --host 127.0.0.1 --port 8002
 ```
 
@@ -87,7 +87,7 @@ The three notebooks in [notebooks/](notebooks/README.md) cover the baseline anal
 
 For analysis on your own labelled dataset, set `SENTINEL_ANALYSIS_CSV=/absolute/path/data.csv` before launching Jupyter; the notebook trains all three models using that CSV and requires a binary `fraud` column.
 
-Training runs lazily on first access and is deterministic; each worker keeps its own in-memory models. A first request is slower. No serialized untrusted model is loaded. Scores are uncalibrated model estimates trained on synthetic data, not validated real-world fraud probabilities. No financial decisions should be automated from this demo. SHAP describes model behaviour, not causation. A real deployment requires licensed data, chronological/customer-group splits, calibration, fairness checks and drift monitoring.
+Development demo mode trains lazily on first access with a fixed seed. Production mode serves a pinned, pre-trained artifact and rejects request-time training; each worker keeps its own loaded model bundle. A first request is slower. No serialized untrusted model is loaded. Scores are uncalibrated model estimates trained on synthetic data, not validated real-world fraud probabilities. No financial decisions should be automated from this demo. SHAP describes model behaviour, not causation. A real deployment requires licensed data, chronological/customer-group splits, calibration, fairness checks and drift monitoring.
 
 Local persistence lives in `data/`; runtime database/model files and secrets are excluded from git. Configuration variables are described in `.env.example`.
 
@@ -124,3 +124,9 @@ The UI includes responsive layouts, accessible form labels, loading/error states
 ## License
 
 MIT · Izuchukwu Tony
+
+## MLOps operations
+
+See [the implemented operating model](docs/mlops.md) for versioned experiments, evaluation gates, notebook CI, runtime fingerprints, monitoring and rollback. Run `python -m app.experiments --output artifacts/release` for a reproducible offline release record. Operational endpoints: `/api/version` and `/api/ops`. Docker uses `requirements-runtime.lock`; analysis and tests use `requirements.lock`.
+
+Production setup requires `APP_ENV=production`, `MODEL_ARTIFACT_DIR` and `MODEL_ARTIFACT_SHA256`. Use the [training, promotion and rollback procedure](docs/mlops.md#sentinel-training-and-promotion); no new candidate is promoted automatically.

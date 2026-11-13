@@ -139,7 +139,35 @@ class RiskService:
 
     def ensure(self):
         if self.bundle is None:
-            self.bundle = train_models()
+            import os
+
+            artifact_directory = os.getenv("MODEL_ARTIFACT_DIR")
+            if artifact_directory:
+                from app.training import load_artifact
+
+                self.bundle = load_artifact(
+                    artifact_directory, os.getenv("MODEL_ARTIFACT_SHA256")
+                )
+            elif os.getenv("APP_ENV") == "production":
+                raise RuntimeError(
+                    "Production serving requires a pinned MODEL_ARTIFACT_DIR and MODEL_ARTIFACT_SHA256; request-time training is disabled"
+                )
+            else:
+                self.bundle = train_models()
+                from app.ops import release_info, digest, canonical
+
+                release = release_info()
+                self.bundle["model_version"] = (
+                    "development-synthetic-"
+                    + digest(
+                        canonical(
+                            {
+                                "app": release["application_sha256"],
+                                "dependencies": release["dependency_lock_sha256"],
+                            }
+                        )
+                    )[:12]
+                )
         return self.bundle
 
     def score(self, data, model_name=None):
@@ -149,14 +177,26 @@ class RiskService:
         frame = pd.DataFrame([data], columns=FEATURES)
         p = float(model.predict_proba(frame)[0, 1])
         t = b["thresholds"][name]
+        self.observe(frame)
         return {
             "probability": p,
             "threshold": t,
             "flagged": p >= t,
             "model": name,
-            "data_source": "synthetic demonstration",
+            "data_source": b.get("data_source", "synthetic demonstration"),
+            "model_version": b["model_version"],
             "explanation": self.explain(frame, name),
         }
+
+    def observe(self, frame):
+        import sqlite3
+        from app.monitoring import FeatureMonitor
+
+        b = self.ensure()
+        try:
+            FeatureMonitor().observe(b["model_version"], b["train_x"], frame)
+        except sqlite3.Error:
+            pass
 
     def explain(self, frame, name):
         import shap

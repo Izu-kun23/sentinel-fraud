@@ -47,6 +47,7 @@ def overview():
     rows.sort(key=lambda r: -r["probability"])
     return {
         "winner": b["winner"],
+        "model_version": b["model_version"],
         "metrics": b["metrics"],
         "validation_ap": b["validation_ap"],
         "prevalence": b["prevalence"],
@@ -56,7 +57,7 @@ def overview():
         "histogram": __import__("numpy")
         .histogram(p, bins=12, range=(0, 1))[0]
         .tolist(),
-        "source": "Synthetic data; not a production fraud model",
+        "source": b.get("data_source", "Synthetic data; not a production fraud model"),
     }
 
 
@@ -82,6 +83,7 @@ def import_transactions(body: CSVImport):
     b = service.ensure()
     name = b["winner"]
     p = b["models"][name].predict_proba(frame)[:, 1]
+    service.observe(frame)
     threshold = b["thresholds"][name]
     rows = [
         {
@@ -97,5 +99,43 @@ def import_transactions(body: CSVImport):
         "count": len(rows),
         "flagged": sum(r["flagged"] for r in rows),
         "model": name,
-        "note": "Scored using the synthetic demonstration model; imported data is not persisted",
+        "model_version": b["model_version"],
+        "note": "Imported raw rows are not persisted; only aggregate distribution counts are monitored.",
     }
+
+
+from app.ops import install_operations
+
+operations_store = install_operations(app)
+
+
+@app.get("/api/ready")
+def ready():
+    import os
+
+    if os.getenv("APP_ENV") == "production":
+        try:
+            bundle = service.ensure()
+        except (ValueError, RuntimeError, OSError) as exc:
+            raise HTTPException(
+                503, "Pinned model artifact is unavailable or invalid"
+            ) from exc
+        return {
+            "ready": True,
+            "model_version": bundle["model_version"],
+            "mode": "artifact serving",
+        }
+    return {
+        "ready": True,
+        "model_loaded": service.bundle is not None,
+        "mode": "development demo",
+    }
+
+
+@app.get("/api/model-monitoring")
+def model_monitoring():
+    from app.monitoring import FeatureMonitor
+
+    if service.bundle is None:
+        return {"status": "no model loaded", "samples": 0}
+    return FeatureMonitor().report(service.bundle["model_version"])

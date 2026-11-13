@@ -1,4 +1,4 @@
-# Tested Python 3.12 environment, including notebook and test tools.
+# Tested Python 3.12 dependency versions.
 annotated-doc==0.0.5
 annotated-types==0.8.0
 anyio==4.14.2

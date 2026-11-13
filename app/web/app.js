@@ -4,6 +4,9 @@ async function load() {
     "Training three models on synthetic data. First load may take a moment…",
   );
   const d = await api("/overview");
+  $("data-notice").textContent =
+    d.source +
+    " · Scores are model estimates; independent validation is required before real financial decisions.";
   const m = d.metrics[d.winner];
   stats([
     ["Test transactions", d.transactions, "20% untouched holdout"],
